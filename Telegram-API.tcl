@@ -742,7 +742,7 @@ proc ::telegram::ircSendMessage {nick hostmask handle channel msg} {
 	if {[string match "*v*" $::telegram::userflags]} {
 		foreach {chat_id tg_channel} [array get ::telegram::tg_channels] {
 			if {$channel eq $tg_channel} {
-				putlog "DEBUG:---ircSendMessage=$msg  ascii2utf8=[binary encode hex "[encoding convertto utf-8 não]"]  sendMessage=[::msgcat::mc MSG_IRC_MSGSENT "$nick" "[url_encode [::libunicode::ascii2utf8 $msg]]"]---"
+				putlog "Debug info:---message=[binary encode hex $msg]  utf8msg=[binary encode hex "[encoding convertto utf-8 $msg]"]  sendMessage=[::msgcat::mc MSG_IRC_MSGSENT "$nick" "[url_encode [::libunicode::ascii2utf8 $msg]]"]---"
 				::libtelegram::sendMessage $chat_id "" "html" [::msgcat::mc MSG_IRC_MSGSENT "$nick" "[url_encode [::libunicode::ascii2utf8 $msg]]"]
 			}
 		}
@@ -1253,6 +1253,8 @@ bind nick - * ::telegram::ircNickChange
 bind topc - * ::telegram::ircTopicChange
 bind kick - * ::telegram::ircNickKicked
 bind mode - * ::telegram::ircModeChange
+
+putlog "Debug info:---encodingSystem=[encoding system]   LC_ALL=$::env(LC_ALL)   LC_CTYPE=$::env(LC_CTYPE)   LANG=$LANG---"
 
 ::telegram::initialize
 
