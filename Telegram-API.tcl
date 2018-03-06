@@ -1254,7 +1254,7 @@ bind topc - * ::telegram::ircTopicChange
 bind kick - * ::telegram::ircNickKicked
 bind mode - * ::telegram::ircModeChange
 
-putlog "Debug info:---encodingSystem=[encoding system]   LC_ALL=$::env(LC_ALL)   LC_CTYPE=$::env(LC_CTYPE)   LANG=$LANG---"
+putlog "Debug info:---encodingSystem=[encoding system]   parray=[parray env]---"
 
 ::telegram::initialize
 
